@@ -95,3 +95,34 @@ function imprimirSiEsMayorDeEdad(persona){
     }
 }
 
+// Arrow functions
+// Funciones anonimas sin necesidad de crearlas con la palabra function nombreDeTuFuncion, de esta forma nosotros podemos crear funciones sin necesidad de crearlas osea podemos hacer que hagan alguna cosa en un momento dato, de una forma mas sencilla y rapida por lo cual es mucho mas beneficioso usarla cuando no es tan complejo lo que queramos desarrollar
+// Tambien podemos crear variables u constante que contenga la funcion anonima, de esta forma simplemente usariamos el nombre de la variable u constante + el parametro que le indiquemos en la funcion anonima que hayamos creado
+// Como habiamos visto anteriormente podemos establecer que reciba un objeto completo a manipularlo de la forma que quermos, o tambien simplemente exigiendo una propiedad en concreto para hacer la funcionalidad que por lo cual podemos hacer mas facil el uso de la funcion y directo al dato que queramos recibir.
+// Claro esta todo esto va radica sustancialmente en lo que queramos hacer que en un punto recibir algo completo como un objeto nos aporte mas que simplemente pidiendo una propiedad en concreto
+const VERIFICAR_MAYORIA_DE_EDAD = ({edad}) =>{
+    return edad >= MAYORIA_DE_EDAD;
+}
+// NT: Esto se puede simplicar aun mas pero esto tiene un costo que lo hace menos legible de leer y entender si no tenemos conocimiento, si nos olvidamos para que creamos alguna funcion hara que todo sea mas dificil pero si tienes curiosidad asi va:
+// const VERIFICAR_MAYORIA_DE_EDAD = ({edad}) => edad >= MAYORIA_DE_EDAD
+
+
+function permitirAcceso(persona) {
+    if(!esMayorDeEdad(persona)){
+        console.log('Acesso denegado');
+    }else{
+        console.log('Acceso Permitido');
+    }
+}
+
+// Reto!!!!!!!
+// Crear un arrow function de menor de edad
+
+// Version simplicista e algo dificil de entender sin previo conocimiento
+const ES_MENOR_DE_EDAD = ({edad}) => edad >= MAYORIA_DE_EDAD;
+// Version happy todos podemos entender 
+function esMenorDeEdad({edad}){
+    // Version mas entendidble aun es usar como parametro persona y en return persona.edad >= MAYORIA_DE_EDAD, que en este caso usamos toda las propiedades del objeto sin usarlas por lo cual usamos mas recursos tener ojo en esto
+    // Cabe destacar que en esta parte solo necesitabamos un dato del objeto de la persona siendo la edad, por lo cual es mas simple y directa buscar simplemente la propiedad respectiva para usarla solamente a ella
+    return edad >= MAYORIA_DE_EDAD;
+}
