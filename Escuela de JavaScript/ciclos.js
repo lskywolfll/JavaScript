@@ -53,7 +53,7 @@ while (rene.peso > META) {
         decrementoDePeso(rene);
     }
     // aumenta en 1 la cantidad de dias en el cual nos esta tomando bajar los 3kg
-    cantidadDeDias++;
+    // cantidadDeDias++;
 }
 // Aqui usamor la interpolacion de ES6, por el cual simplemente usando las `` nosotros podemos usar las ${variable} para no tener que concatenar(o unir) los valores que nosotros queramos imprimir en pantalla o en su defecto como ahora por consola
 // A que es mejor que usar 'Pasaron' + cantidadDeDias + ' dias hasta que ' + 'rene.nombre' + ' adelgazo 3kg' aque si no lo nieges T_T
