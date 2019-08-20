@@ -46,10 +46,42 @@ document.write('Lenguajes de programacion disponibles son: ')
 // ul => es una lista desordenada por sus siglas del ingles, urdened list
 document.write('<ul>');
 
-for (let i = 0; i < lenguajes.length; i++) {
-    const elemento = lenguajes[i];
-    // li => es un elemento de una lista por sus siglas del ingles, list item
-    document.write(`<li>${elemento}</li>`);
-}
+// for (let i = 0; i < lenguajes.length; i++) {
+//     const elemento = lenguajes[i];
+//     // li => es un elemento de una lista por sus siglas del ingles, list item
+//     document.write(`<li>${elemento}</li>`);
+// }
 
 document.write('</ul>')
+
+// Nuevo recorrido en nuestra cajita para ver todos los elementos que contiene la cajita(array), esto nos ahorra la necesidad de usar un for con el cual nosotros tenemos que ingresar todos los datos(variables) y condiciones para recorrerlo.
+// En cambio con este forEach nosotros simplificamos todo usando funciones anonimas con arrow functions(funciones de flecha)
+// forEach(valor,ubicacion,array(cajita) )
+// lenguajes.forEach( (elemento,indice,data) => {
+//     document.write(`<li> ${indice} ${elemento} </li>`)
+// });
+
+// Recorrer una cajita(array) usando otro tipo de recorrido con un for in
+// nosotros creamos una variable que contendra la posicion del elemento en el cual nosotros queremos obtener lo que tiene
+for(let ubicacion in lenguajes){
+    document.write(`<li> ${lenguajes[ubicacion]} </li>`)
+}
+
+// Busquedas
+var buscar = prompt('Cual lenguaje quieres buscar ? ', 'PHP')
+const BUSQUEDA = lenguajes.find( (lenguaje) => lenguaje == buscar);
+// Tambien existe el metodo para encontrar un texto y obtener su indice osea la ubicacion en la que se encuentra en la cajita
+lenguajes.findIndex( (lenguaje) => lenguaje == 'PHP' );
+
+if (BUSQUEDA != null) {
+    alert(`Se ha encontrado que si existe el lenguaje ${BUSQUEDA} en nuestro sistema :)`);
+}
+
+console.log(BUSQUEDA);
+
+// Filtro para comprobar si existen valores mayores,menores o iguales a un valor
+var precios = [20,10,50,80,12];
+// Me devuelve solamente si es verdadero que el precio que nosotros indiquemos es mayor a 20, osea si existen valores mayores a 20 como dejamos en nuestra condicion
+const BUSQUEDA_DE_PRECIOS = precios.some( (precio) => precio >= 20 );
+
+console.log(BUSQUEDA_DE_PRECIOS);
