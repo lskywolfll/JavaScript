@@ -41,4 +41,3 @@ class Desarrollador extends Persona{
 // for (const persona of personitas) {
 //     console.log(persona.mide());
 // }
-
