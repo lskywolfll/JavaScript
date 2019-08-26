@@ -12,6 +12,7 @@
 //  Solucion Mia
 var limite = 0;
 var numeros = [];
+const CANTIDAD_DE_NUMEROS = 6;
 
 function escribirEnPagina(cajita,ordenamiento = "") {
     document.write(`Listamiento de los elementos de nuestra cajita ${ordenamiento}`);
@@ -27,7 +28,7 @@ function escribirEnPagina(cajita,ordenamiento = "") {
     document.write('</ul>');
 }
 
-for (let index = 0; index < 6; index++) {
+for (let index = 0; index < CANTIDAD_DE_NUMEROS; index++) {
     let elemento = parseInt(prompt('Introduce tu numero', 0));
     if(elemento == null || isNaN(elemento)){
         elemento = parseInt(prompt('Introduce un numero valido', 0));
@@ -65,7 +66,7 @@ var buscar = parseInt(prompt('Introduce un numero para ver si existe',0));
 var comprobacion = numeros.findIndex( posicion => posicion == buscar);
 
 if(comprobacion > -1){
-    document.write(`<hr>Tu numero ingresado ${buscar} si existe y esta ubicado en la posicion ${numeros.indexOf(buscar)}`);
+    document.write(`<hr>Tu numero ingresado ${buscar} si existe y esta ubicado en la posicion ${comprobacion}`);
 }else{
     document.write('<hr>Tu numero no existe saquese');
 }
