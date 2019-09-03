@@ -33,6 +33,7 @@ for (const valor in todosLosDivs) {
         document.querySelector('#miseccion').appendChild(parrafo);
     }
 }
+
 document.querySelector('#miseccion').appendChild(document.createElement('hr'));
 // Conseguir elementos por su clase css
 var divsRojos = document.getElementsByClassName('rojo');
