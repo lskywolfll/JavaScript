@@ -15,8 +15,14 @@ class Persona{
     };
 
     verificarAltura() {this.altura >= 1.80;}
-    
-    saludar() { console.log(`Hola me llamo ${this.nombre} ${this.apellido} `);}
+    // fn => function
+    saludar(fn) {
+        if (fn) {
+            fn(this.nombre,this.apellido);
+        }else{
+            console.log(`Hola, me llamo ${this.nombre} ${this.apellido} y soy desarrollador`)
+        }
+    }
 
 }
 
@@ -27,8 +33,17 @@ class Desarrollador extends Persona{
         super(nombre,apellido,altura);
     }
     // Sobrescribimos el metodo saludar de Persona en desarrollador para que el sean definiciones distintas por ser objetos distintos pero con heredacion de otro objeto, en este punto el saludo del desarrollador es distinto del saludo de la persona y este cambio no afecta al objeto del cual heredamos sino que solo el cambio permanece en el objeto Desarrollador en este ejemplo
-    saludar(){
-        console.log(`Hola, me llamo ${this.nombre} ${this.apellido} y soy desarrollador`)
+
+    // fn = function
+    saludar(fn){
+        // Practicamente podemos usar lo mismo que en arrow functions(funciones flecha) para poder acceder a unas propiedades concreta que hayamos creado, en este punto nuestro objeto
+        var { nombre,apellido } = this;
+
+        if (fn) {
+            fn(nombre,apellido,true);
+        }else{
+            console.log(`Hola, me llamo ${this.nombre} ${this.apellido} y soy desarrollador`)
+        }
     }
 }
 
@@ -41,3 +56,17 @@ class Desarrollador extends Persona{
 // for (const persona of personitas) {
 //     console.log(persona.mide());
 // }
+
+function responderSaludo(nombre,apellido, esDev) {
+    console.log(`Buen dia ${nombre} ${apellido}`);
+    if(esDev){
+        console.log(`Ah mirá, no sabia que eras desarrollador/a`);
+    }
+}
+
+var Rene = new Persona('René','Sanchez',1.75);
+var erika = new Persona('Erika','Luna',1.85);
+var arturo = new Desarrollador('Arturo','Martinez',1.80);
+
+Rene.saludar(responderSaludo);
+arturo.saludar(responderSaludo);
