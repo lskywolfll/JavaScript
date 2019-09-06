@@ -18,7 +18,7 @@ const obtenerPersonaje = (id, callback) => {
         }
     );
 
-    // Aqui ingresamos si conteine algo el callback, entonces queremos que se llame a esa funcion llamada que en este punto puede ser la misma funcion que estamos usando actualmente para obtener los personajes del star wars
+    // Aqui ingresamos si contiene algo el callback, entonces queremos que se llame a esa funcion llamada que en este punto puede ser la misma funcion que estamos usando actualmente para obtener los personajes del star wars
     if(callback){
         callback();
     }
@@ -38,8 +38,33 @@ const obtenerPersonaje = (id, callback) => {
 // vale vale simplemente es el infierno de los callbacks en el sentido que se ira desarrollando nuestro codigo de forma mas horizontal por cada uno de ellos
 
 // La solucion esta bien, lo unico que puede ocurrir es que visualmente no se vea agradable a simple vista esta solucion que practicamente funciona
-obtenerPersonaje(1, function () {
-    obtenerPersonaje(2, function () {
-        obtenerPersonaje(3)
-    })
-})
+// obtenerPersonaje(1, function () {
+//     obtenerPersonaje(2, function () {
+//         obtenerPersonaje(3)
+//     })
+// });
+
+// Promises
+// Las promesas le ventaja que nos brinda un poco es que nos brinda por defecto 2 parametros los cuales contendran un donde se haya recibido correctamente los datos y la otra en al que nos avisa si no se pudo conseguir dichos datos, ademas que nos devuelve dichos datos.
+
+// .then metododo then nos sirve para convertirlo en promesa y recibir el dato que se haya hecho correctamente
+// .cath metodo cath que toma el error en caso haya ocurrido algo inesperado por si se desconecto de la red,internet,corte de luz del servidor y etc
+// nombreFuncion(parametro).then(funcion anonima o funcion que se encarga de manipular el dato que nos retornara este metodo al igual que el cath).cath(funcion anonima o funcion propia que vaya a manipular el error de alguna forma)
+
+const obtenerPersonajePromise = (id, callback) => {
+    return new Promise( (resolve,reject) => 
+        {
+            const url = `${API_URL}${PEOPLE_URL.replace(':id',id)}`;
+
+            $
+            .get(url,opts, (data) => resolve(data))
+            .fail( () => reject(id))
+        }
+    )
+};
+
+const nombrePersonaje = (personaje) => console.log(`El personaje es ${personaje.name}`);
+
+const errorDeId = (id) => console.log(`Ha ocurrido un error al obtener el id ${id}`);
+
+obtenerPersonajePromise(1).then(nombrePersonaje).catch(errorDeId);
