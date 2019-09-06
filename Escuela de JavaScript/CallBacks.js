@@ -48,7 +48,9 @@ const obtenerPersonaje = (id, callback) => {
 // Las promesas le ventaja que nos brinda un poco es que nos brinda por defecto 2 parametros los cuales contendran un donde se haya recibido correctamente los datos y la otra en al que nos avisa si no se pudo conseguir dichos datos, ademas que nos devuelve dichos datos.
 
 // .then metododo then nos sirve para convertirlo en promesa y recibir el dato que se haya hecho correctamente
+
 // .cath metodo cath que toma el error en caso haya ocurrido algo inesperado por si se desconecto de la red,internet,corte de luz del servidor y etc
+
 // nombreFuncion(parametro).then(funcion anonima o funcion que se encarga de manipular el dato que nos retornara este metodo al igual que el cath).cath(funcion anonima o funcion propia que vaya a manipular el error de alguna forma)
 
 const obtenerPersonajePromise = (id, callback) => {
@@ -63,8 +65,38 @@ const obtenerPersonajePromise = (id, callback) => {
     )
 };
 
-const nombrePersonaje = (personaje) => console.log(`El personaje es ${personaje.name}`);
+const nombrePersonaje = (personaje) => {
+    console.log(`El personaje es ${personaje.name}`);
+    // return obtenerPersonajePromise(id);
+};
 
 const errorDeId = (id) => console.log(`Ha ocurrido un error al obtener el id ${id}`);
 
-obtenerPersonajePromise(1).then(nombrePersonaje).catch(errorDeId);
+var ids = [1,2,3,4,5,6,7];
+var promesas = ids.map( id => obtenerPersonajePromise(id));
+
+Promise
+    .all(promesas)
+    .then( personajes => 
+        {
+            for (const posicion in personajes) {
+                if (personajes.hasOwnProperty(posicion)) {
+                    const personaje = personajes[posicion].name;
+                    console.log(`Hola yo soy ${personaje}`)
+                }
+            }
+        } 
+    )
+    .catch(errorDeId)
+
+// obtenerPersonajePromise(1).then(nombrePersonaje).catch(errorDeId);
+
+// obtenerPersonajePromise(1)
+// .then(personaje => {
+//     console.log(`El personaje es: ${personaje.name}`)
+//     return obtenerPersonajePromise(2)
+// })
+// .then(personaje => {
+//     console.log(`El personaje es: ${personaje.name}`)
+//     return obtenerPersonajePromise(3)
+// });
