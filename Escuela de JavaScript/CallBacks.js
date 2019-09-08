@@ -72,22 +72,48 @@ const nombrePersonaje = (personaje) => {
 
 const errorDeId = (id) => console.log(`Ha ocurrido un error al obtener el id ${id}`);
 
-var ids = [1,2,3,4,5,6,7];
-var promesas = ids.map( id => obtenerPersonajePromise(id));
+// Async y Await
 
-Promise
-    .all(promesas)
-    .then( personajes => 
-        {
-            for (const posicion in personajes) {
-                if (personajes.hasOwnProperty(posicion)) {
-                    const personaje = personajes[posicion].name;
-                    console.log(`Hola yo soy ${personaje}`)
-                }
+// Async establece la creacion de funcionalidades asincronas que permitira el uso del metodo para establecer que se espere un resultado completo antes de asignar y obtener un dato.
+
+// Await establece que quiero un dato completo, a que nos referimos con ello es que como hacemos peticiones a las apis y no sabemos realmente cuando nos llegaran esos datos que tienen muchas variables con el tiempo, entonces simplemente establecemos el await para esperar que este todo OK con todas las promesas como lo hicimos en los personajes, cabe destacar que hemos puesto el metodo .all para tener todas las promesas ya resueltas.
+
+async function obtenerPersonajes(){
+    var ids = [1,2,3,4,5,6,7];
+    var promesas = ids.map( id => obtenerPersonajePromise(id));
+    // Uso del async y await
+    // Forma mas sencilla para implementar el uso de los callbacks conjunto a las promesas
+    try {
+        var personajes = await Promise.all(promesas);
+        for (const posicion in personajes) {
+            if (personajes.hasOwnProperty(posicion)) {
+                // Queremos simplemente la propiedad del nombre de los objetos json recibidos mediante la api, sin la propiedad name nos devuelve un objeto vacio estandarizado que no es el objeto que nosotros queremos siendo el de la api respectivamentel.
+                const personaje = personajes[posicion].name;
+                console.log(`Hola yo soy ${personaje}`)
             }
-        } 
-    )
-    .catch(errorDeId)
+        }
+    } catch (id) {
+        errorDeId(id);
+    }
+    
+    // Forma mas larga sin el uso del async con el await
+
+    // Promise
+    //     .all(promesas)
+    //     .then( personajes => 
+    //         {
+    //             for (const posicion in personajes) {
+    //                 if (personajes.hasOwnProperty(posicion)) {
+    //                     const personaje = personajes[posicion].name;
+    //                     console.log(`Hola yo soy ${personaje}`)
+    //                 }
+    //             }
+    //         } 
+    //     )
+    //     .catch(errorDeId)
+}
+
+obtenerPersonajes();
 
 // obtenerPersonajePromise(1).then(nombrePersonaje).catch(errorDeId);
 
